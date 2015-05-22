@@ -1,6 +1,7 @@
 gulp    = require 'gulp'
 peg     = require 'gulp-peg'
 webpack = require 'gulp-webpack'
+rename  = require 'gulp-rename'
 
 gulp.task 'default', ['build']
 
@@ -10,10 +11,11 @@ gulp.task 'peg', ->
   gulp
     .src('src/tag-data.peg')
     .pipe(peg())
-    .pipe(gulp.dest('src'))
+    .pipe(rename('parser.js'))
+    .pipe(gulp.dest('dist'))
 
 gulp.task 'webpack', ->
   gulp
-    .src('src/tag-data.js')
+    .src('src/index.js')
     .pipe(webpack(require('./webpack.config')))
     .pipe(gulp.dest('./'))
