@@ -1,0 +1,45 @@
+{
+  /**
+   * @example
+   * // returns ['ruby', 'python', 'perl']
+   * mergeSeparatedValues('ruby', [[' ', 'python'], ['   ', 'perl']]);
+   * @returns {Array}
+   */
+  function mergeSeparatedValues(value, variadicArray) {
+    var i, result = [value];
+    for (i = 0; i < variadicArray.length; i++) {
+      result.push(variadicArray[i][1]);
+    }
+    return result;
+  }
+}
+
+Start
+  = TagData?
+
+TagData "tag data"
+  = value:TagDatum variadicArray:($TagSeparater TagDatum)* {
+    return mergeSeparatedValues(value, variadicArray);
+  }
+
+TagSeparater
+  = [ ]+
+
+TagDatum "name and versions"
+  = name:Name versions:(":" Versions)? {
+    return { name: name.join(""), versions: versions ? versions[1] : [] };
+  }
+
+Name
+  = [a-z0-9]+
+
+Versions
+  = value:$Version variadicArray:($VersionSeparater $Version)* {
+    return mergeSeparatedValues(value, variadicArray);
+  }
+
+Version
+  = [a-z0-9.]+
+
+VersionSeparater
+  = ","
