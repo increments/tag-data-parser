@@ -39,8 +39,8 @@ module.exports = (function() {
         peg$c4 = function(value, variadicArray) {
             return mergeSeparatedValues(value, variadicArray);
           },
-        peg$c5 = /^[ ]/,
-        peg$c6 = { type: "class", value: "[ ]", description: "[ ]" },
+        peg$c5 = " ",
+        peg$c6 = { type: "literal", value: " ", description: "\" \"" },
         peg$c7 = { type: "other", description: "name and versions" },
         peg$c8 = ":",
         peg$c9 = { type: "literal", value: ":", description: "\":\"" },
@@ -314,8 +314,8 @@ module.exports = (function() {
       var s0, s1;
 
       s0 = [];
-      if (peg$c5.test(input.charAt(peg$currPos))) {
-        s1 = input.charAt(peg$currPos);
+      if (input.charCodeAt(peg$currPos) === 32) {
+        s1 = peg$c5;
         peg$currPos++;
       } else {
         s1 = peg$FAILED;
@@ -324,8 +324,8 @@ module.exports = (function() {
       if (s1 !== peg$FAILED) {
         while (s1 !== peg$FAILED) {
           s0.push(s1);
-          if (peg$c5.test(input.charAt(peg$currPos))) {
-            s1 = input.charAt(peg$currPos);
+          if (input.charCodeAt(peg$currPos) === 32) {
+            s1 = peg$c5;
             peg$currPos++;
           } else {
             s1 = peg$FAILED;

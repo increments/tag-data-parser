@@ -23,7 +23,7 @@ TagData "tag data"
   }
 
 TagSeparater
-  = [ ]+
+  = " "+
 
 TagDatum "name and versions"
   = name:Name versions:(":" Versions)? {
