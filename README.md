@@ -19,3 +19,9 @@ Take it.
   window.TagDataParser.parse('ruby:2.1 rails:4.2.3');
 </script>
 ```
+
+## Develop
+
+```bash
+npm test
+```
