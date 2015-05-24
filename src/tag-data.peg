@@ -34,12 +34,12 @@ Name
   = [a-z0-9]+
 
 Versions
-  = value:$Version variadicArray:($VersionSeparater $Version)* {
+  = value:Version variadicArray:($VersionSeparater Version)* {
     return mergeSeparatedValues(value, variadicArray);
   }
 
 Version
-  = [a-z0-9.]+
+  = version:$([^,\\ ] / "\\ ")+ { return version.replace(/\\ /g, " "); }
 
 VersionSeparater
   = ","

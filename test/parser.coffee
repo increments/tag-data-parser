@@ -14,3 +14,11 @@ describe 'TagDataParser', ->
           versions: ['3.x', '4.x']
         }
       ])
+
+    it 'accepts version with spaces', ->
+      expect(parser.parse('tag:version,\\ with\\ space')).to.deep.equal([
+        {
+          name: 'tag'
+          versions: ['version', ' with space']
+        }
+      ])
