@@ -39,7 +39,9 @@ Versions
   }
 
 Version
-  = version:$([^,\\ ] / "\\ ")+ { return version.replace(/\\ /g, " "); }
+  = version:$([^,\\ ] / "\\ " / "\\\\")+ {
+    return version.replace(/\\ /g, " ").replace(/\\\\/g, '\\');
+  }
 
 VersionSeparater
   = ","

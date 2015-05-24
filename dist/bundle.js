@@ -109,9 +109,13 @@
 	        peg$c14 = { type: "class", value: "[^,\\\\ ]", description: "[^,\\\\ ]" },
 	        peg$c15 = "\\ ",
 	        peg$c16 = { type: "literal", value: "\\ ", description: "\"\\\\ \"" },
-	        peg$c17 = function(version) { return version.replace(/\\ /g, " "); },
-	        peg$c18 = ",",
-	        peg$c19 = { type: "literal", value: ",", description: "\",\"" },
+	        peg$c17 = "\\\\",
+	        peg$c18 = { type: "literal", value: "\\\\", description: "\"\\\\\\\\\"" },
+	        peg$c19 = function(version) {
+	            return version.replace(/\\ /g, " ").replace(/\\\\/g, '\\');
+	          },
+	        peg$c20 = ",",
+	        peg$c21 = { type: "literal", value: ",", description: "\",\"" },
 
 	        peg$currPos          = 0,
 	        peg$reportedPos      = 0,
@@ -559,6 +563,15 @@
 	          s3 = peg$FAILED;
 	          if (peg$silentFails === 0) { peg$fail(peg$c16); }
 	        }
+	        if (s3 === peg$FAILED) {
+	          if (input.substr(peg$currPos, 2) === peg$c17) {
+	            s3 = peg$c17;
+	            peg$currPos += 2;
+	          } else {
+	            s3 = peg$FAILED;
+	            if (peg$silentFails === 0) { peg$fail(peg$c18); }
+	          }
+	        }
 	      }
 	      if (s3 !== peg$FAILED) {
 	        while (s3 !== peg$FAILED) {
@@ -578,6 +591,15 @@
 	              s3 = peg$FAILED;
 	              if (peg$silentFails === 0) { peg$fail(peg$c16); }
 	            }
+	            if (s3 === peg$FAILED) {
+	              if (input.substr(peg$currPos, 2) === peg$c17) {
+	                s3 = peg$c17;
+	                peg$currPos += 2;
+	              } else {
+	                s3 = peg$FAILED;
+	                if (peg$silentFails === 0) { peg$fail(peg$c18); }
+	              }
+	            }
 	          }
 	        }
 	      } else {
@@ -589,7 +611,7 @@
 	      s1 = s2;
 	      if (s1 !== peg$FAILED) {
 	        peg$reportedPos = s0;
-	        s1 = peg$c17(s1);
+	        s1 = peg$c19(s1);
 	      }
 	      s0 = s1;
 
@@ -600,11 +622,11 @@
 	      var s0;
 
 	      if (input.charCodeAt(peg$currPos) === 44) {
-	        s0 = peg$c18;
+	        s0 = peg$c20;
 	        peg$currPos++;
 	      } else {
 	        s0 = peg$FAILED;
-	        if (peg$silentFails === 0) { peg$fail(peg$c19); }
+	        if (peg$silentFails === 0) { peg$fail(peg$c21); }
 	      }
 
 	      return s0;

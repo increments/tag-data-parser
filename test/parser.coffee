@@ -22,3 +22,11 @@ describe 'TagDataParser', ->
           versions: ['version', ' with space']
         }
       ])
+
+    it 'accepts version with backslashes', ->
+      expect(parser.parse('tag:back\\\\slash')).to.deep.equal([
+        {
+          name: 'tag'
+          versions: ['back\\slash']
+        }
+      ])
