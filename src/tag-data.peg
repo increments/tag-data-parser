@@ -31,7 +31,14 @@ TagDatum "name and versions"
   }
 
 Name
-  = [^<>;:"' ]+
+  = NameElement+
+
+NameElement
+  = char:$[<>;"'] {
+    var expr = char == '"' ? "'\"'" : '"' + char + '"';
+    error("Tag name includes illegal character: " + expr);
+  }
+  / [^: ]
 
 Versions
   = value:Version variadicArray:($VersionSeparater Version)* {
