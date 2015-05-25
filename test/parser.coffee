@@ -15,6 +15,18 @@ describe 'TagDataParser', ->
         }
       ])
 
+    it 'accepts multi bytes tag name and versions', ->
+      expect(parser.parse('タグ1 タグ2:バージョン1,バージョン2')).to.deep.equal([
+        {
+          name: 'タグ1'
+          versions: []
+        }
+        {
+          name: 'タグ2'
+          versions: ['バージョン1', 'バージョン2']
+        }
+      ])
+
     it 'accepts version with spaces', ->
       expect(parser.parse('tag:version,\\ with\\ space')).to.deep.equal([
         {
