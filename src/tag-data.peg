@@ -26,12 +26,12 @@ TagSeparater
   = " "+
 
 TagDatum "name and versions"
-  = name:Name versions:(":" Versions)? {
-    return { name: name.join(""), versions: versions ? versions[1] : [] };
+  = name:$Name versions:(":" Versions)? {
+    return { name: name, versions: versions ? versions[1] : [] };
   }
 
 Name
-  = [a-z0-9]+
+  = [^<>;:"' ]+
 
 Versions
   = value:Version variadicArray:($VersionSeparater Version)* {

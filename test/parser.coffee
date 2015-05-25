@@ -27,6 +27,33 @@ describe 'TagDataParser', ->
         }
       ])
 
+    ["<", ">", ";", '"', "'"].forEach (char) ->
+      it "throws SyntaxError when name includes #{char}", ->
+        expect(-> parser.parse("na#{char}me")).to.throw(parser.SyntaxError)
+
+    it 'does not accept name with a space', ->
+      expect(parser.parse("foo bar:baz")).to.deep.equal([
+        {
+          name: 'foo'
+          versions: []
+        }
+        {
+          name: 'bar'
+          versions: ['baz']
+        }
+      ])
+
+      expect(parser.parse("foo\\ bar:baz")).to.deep.equal([
+        {
+          name: 'foo\\'
+          versions: []
+        }
+        {
+          name: 'bar'
+          versions: ['baz']
+        }
+      ])
+
     it 'accepts version with spaces', ->
       expect(parser.parse('tag:version,\\ with\\ space')).to.deep.equal([
         {

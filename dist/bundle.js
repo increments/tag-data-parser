@@ -101,10 +101,10 @@
 	        peg$c8 = ":",
 	        peg$c9 = { type: "literal", value: ":", description: "\":\"" },
 	        peg$c10 = function(name, versions) {
-	            return { name: name.join(""), versions: versions ? versions[1] : [] };
+	            return { name: name, versions: versions ? versions[1] : [] };
 	          },
-	        peg$c11 = /^[a-z0-9]/,
-	        peg$c12 = { type: "class", value: "[a-z0-9]", description: "[a-z0-9]" },
+	        peg$c11 = /^[^<>;:"' ]/,
+	        peg$c12 = { type: "class", value: "[^<>;:\"' ]", description: "[^<>;:\"' ]" },
 	        peg$c13 = /^[^,\\ ]/,
 	        peg$c14 = { type: "class", value: "[^,\\\\ ]", description: "[^,\\\\ ]" },
 	        peg$c15 = "\\ ",
@@ -400,7 +400,12 @@
 
 	      peg$silentFails++;
 	      s0 = peg$currPos;
-	      s1 = peg$parseName();
+	      s1 = peg$currPos;
+	      s2 = peg$parseName();
+	      if (s2 !== peg$FAILED) {
+	        s2 = input.substring(s1, peg$currPos);
+	      }
+	      s1 = s2;
 	      if (s1 !== peg$FAILED) {
 	        s2 = peg$currPos;
 	        if (input.charCodeAt(peg$currPos) === 58) {
