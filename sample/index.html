@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample</title>
+    <style>
+        #tags {
+            width: 500px;
+            line-height: 28px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <input id="tags" value="ruby:2.2.0 rails:3.x,4.x"></input>
+    <div id="messages"></div>
+    <script src="../dist/bundle.js"></script>
+    <script>
+        function handleKeyUp(ev) {
+            try {
+                var tagData = TagDataParser.parse(ev.currentTarget.value);
+                renderMessage(JSON.stringify(tagData));
+            } catch (e) {
+                if (e instanceof TagDataParser.SyntaxError) {
+                    renderMessage(e.message);
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        function renderMessage(message) {
+            document.getElementById('messages')
+                .innerHTML = message;
+        }
+
+        window.addEventListener('load', function () {
+            var el = document.getElementById('tags')
+
+            el.addEventListener('keyup', handleKeyUp);
+
+            var tagData = TagDataParser.parse(el.value);
+            renderMessage(JSON.stringify(tagData));
+        });
+    </script>
+</body>
+</html>
