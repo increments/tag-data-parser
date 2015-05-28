@@ -7,13 +7,17 @@
             width: 500px;
             line-height: 28px;
             font-size: 18px;
+            text-align: center;
         }
     </style>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <input id="tags" type="text" value="ruby:2.2.0 rails:3.x,4.x"></input>
-    <div id="messages"></div>
+    <center>
+        <h1>TagDataParser</h1>
+        <input id="tags" type="text" value="ruby:2.2.0 rails:3.x,4.x " autofocus="true"></input>
+        <div id="messages"></div>
+    </center>
     <script src="../dist/bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://yuku-t.com/jquery-textcomplete/media/javascripts/jquery.textcomplete.js"></script>
@@ -21,7 +25,7 @@
         $(function () {
             function handleKeyUp(ev) {
                 try {
-                    var tagData = TagDataParser.parse(ev.currentTarget.value);
+                    var tagData = TagDataParser.parse(ev.currentTarget.value.trim());
                     renderMessage(JSON.stringify(tagData));
                 } catch (e) {
                     if (e instanceof TagDataParser.SyntaxError) {
@@ -36,14 +40,14 @@
                 $('#messages').html(message);
             }
 
-            var tagData = TagDataParser.parse($('#tags').val());
+            var tagData = TagDataParser.parse($('#tags').val().trim());
             renderMessage(JSON.stringify(tagData));
 
             $('#tags')
                 .on('keyup', handleKeyUp)
                 .textcomplete([{
                     tags: ['ruby', 'python', 'perl'],
-                    match: /\b(\w{1,})$/,
+                    match: /\b([^<>;:"'\s]+)$/,
                     search: function (term, callback) {
                         callback($.map(this.tags, function (tag) {
                             return tag.indexOf(term.toLowerCase()) === 0 ? tag : null;
@@ -51,7 +55,7 @@
                     },
                     index: 1,
                     replace: function (tag) {
-                        return tag;
+                        return tag + ' ';
                     }
                 }]);
         });
