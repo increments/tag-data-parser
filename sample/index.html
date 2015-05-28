@@ -9,37 +9,51 @@
             font-size: 18px;
         }
     </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <input id="tags" value="ruby:2.2.0 rails:3.x,4.x"></input>
+    <input id="tags" type="text" value="ruby:2.2.0 rails:3.x,4.x"></input>
     <div id="messages"></div>
     <script src="../dist/bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://yuku-t.com/jquery-textcomplete/media/javascripts/jquery.textcomplete.js"></script>
     <script>
-        function handleKeyUp(ev) {
-            try {
-                var tagData = TagDataParser.parse(ev.currentTarget.value);
-                renderMessage(JSON.stringify(tagData));
-            } catch (e) {
-                if (e instanceof TagDataParser.SyntaxError) {
-                    renderMessage(e.message);
-                } else {
-                    throw e;
+        $(function () {
+            function handleKeyUp(ev) {
+                try {
+                    var tagData = TagDataParser.parse(ev.currentTarget.value);
+                    renderMessage(JSON.stringify(tagData));
+                } catch (e) {
+                    if (e instanceof TagDataParser.SyntaxError) {
+                        renderMessage(e.message);
+                    } else {
+                        throw e;
+                    }
                 }
             }
-        }
 
-        function renderMessage(message) {
-            document.getElementById('messages')
-                .innerHTML = message;
-        }
+            function renderMessage(message) {
+                $('#messages').html(message);
+            }
 
-        window.addEventListener('load', function () {
-            var el = document.getElementById('tags')
-
-            el.addEventListener('keyup', handleKeyUp);
-
-            var tagData = TagDataParser.parse(el.value);
+            var tagData = TagDataParser.parse($('#tags').val());
             renderMessage(JSON.stringify(tagData));
+
+            $('#tags')
+                .on('keyup', handleKeyUp)
+                .textcomplete([{
+                    tags: ['ruby', 'python', 'perl'],
+                    match: /\b(\w{1,})$/,
+                    search: function (term, callback) {
+                        callback($.map(this.tags, function (tag) {
+                            return tag.indexOf(term.toLowerCase()) === 0 ? tag : null;
+                        }));
+                    },
+                    index: 1,
+                    replace: function (tag) {
+                        return tag;
+                    }
+                }]);
         });
     </script>
 </body>
