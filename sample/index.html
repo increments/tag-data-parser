@@ -29,7 +29,14 @@
                     renderMessage(JSON.stringify(tagData));
                 } catch (e) {
                     if (e instanceof TagDataParser.SyntaxError) {
-                        renderMessage(e.message);
+                        renderMessage(JSON.stringify({
+                            message: e.message,
+                            expected: e.expected,
+                            found: e.found,
+                            offset: e.offset,
+                            line: e.line,
+                            column: e.column
+                        }));
                     } else {
                         throw e;
                     }
