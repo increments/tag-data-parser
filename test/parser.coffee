@@ -29,8 +29,7 @@ describe 'TagDataParser', ->
 
     ["<", ">", ";", '"', "'"].forEach (char) ->
       it "throws SyntaxError when name includes #{char}", ->
-        regexp = new RegExp(char)
-        expect(-> parser.parse("na#{char}me")).to.throw(parser.SyntaxError, regexp)
+        expect(-> parser.parse("na#{char}me")).to.throw(parser.SyntaxError)
 
     it 'does not accept name with a space', ->
       expect(parser.parse("foo bar:baz")).to.deep.equal([
