@@ -5,6 +5,7 @@
   "homepage": "https://github.com/increments/tag-data-parser",
   "url": "https://github.com/increments/tag-data-parser/issues",
   "license": "MIT",
+  "main": "dist/parser.js",
   "author": {
     "name": "Yuku Takahashi",
     "email": "yuku@qiita.com"
