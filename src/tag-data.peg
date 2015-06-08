@@ -15,11 +15,14 @@
 }
 
 Start
-  = TagData?
+  = TagData
 
 TagData "tag data"
   = value:TagDatum variadicArray:($TagSeparater TagDatum)* {
     return mergeSeparatedValues(value, variadicArray);
+  }
+  / "" {
+    return [];
   }
 
 TagSeparater
