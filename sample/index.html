@@ -61,10 +61,21 @@
                         }));
                     },
                     index: 1,
-                    replace: function (tag) {
-                        return tag + ' ';
+                    replace: function (tag, e) {
+                        if (e && e.colon) {
+                            return tag + ':';
+                        } else {
+                            return tag + ' ';
+                        }
                     }
-                }]);
+                }], {
+                    onKeydown: function (e, commands) {
+                        if (e.shiftKey && e.keyCode === 186) {
+                            e.colon = true;
+                            return commands.KEY_ENTER;
+                        }
+                    }
+                });
         });
     </script>
 </body>
