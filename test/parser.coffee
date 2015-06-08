@@ -3,7 +3,10 @@ parser = require '../dist/parser'
 
 describe 'TagDataParser', ->
   describe '#parse()', ->
-    it 'returns a tag data object', ->
+    it 'returns an empty tag data object for empty input', ->
+      expect(parser.parse('')).to.deep.equal([])
+
+    it 'returns a tag data object for valid tags', ->
       expect(parser.parse('ruby:2.1.2 rails:3.x,4.x')).to.deep.equal([
         {
           name: 'ruby'
