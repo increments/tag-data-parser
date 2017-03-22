@@ -1,6 +1,6 @@
 {
   "name": "tag-data-parser",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Tag parser for Qiita and Kobito",
   "homepage": "https://github.com/increments/tag-data-parser",
   "url": "https://github.com/increments/tag-data-parser/issues",
@@ -15,8 +15,7 @@
     "url": "git@github.com:increments/tag-data-parser.git"
   },
   "scripts": {
-    "build": "gulp",
-    "test": "mocha"
+    "test": "node_modules/.bin/mocha"
   },
   "devDependencies": {
     "chai": "^2.1.0",
