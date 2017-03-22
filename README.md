@@ -1,5 +1,10 @@
 # TagDataParser
 
+[![Travis](https://img.shields.io/travis/increments/tag-data-parser.svg?style=flat-square)](https://travis-ci.org/increments/tag-data-parser)
+[![npm](https://img.shields.io/npm/v/tag-data-parser.svg?style=flat-square)](https://www.npmjs.com/package/tag-data-parser)
+
+Tag notation parser for [Qiita](http://qiita.com)
+
 ## Use
 
 Fork and setup for your use.
