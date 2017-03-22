@@ -72,3 +72,11 @@ describe 'TagDataParser', ->
           versions: ['back\\slash']
         }
       ])
+
+    it 'accepts semicolon without version', ->
+      expect(parser.parse('tag:')).to.deep.equal([
+        {
+          name: 'tag'
+          versions: []
+        }
+      ])

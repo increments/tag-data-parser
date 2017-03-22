@@ -15,7 +15,8 @@
     "url": "git@github.com:increments/tag-data-parser.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "build": "gulp",
+    "test": "mocha"
   },
   "devDependencies": {
     "chai": "^2.1.0",

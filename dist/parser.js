@@ -440,6 +440,9 @@ module.exports = (function() {
 
       s0 = peg$currPos;
       s1 = peg$parseVersion();
+      if (s1 === peg$FAILED) {
+        s1 = peg$c9;
+      }
       if (s1 !== peg$FAILED) {
         s2 = [];
         s3 = peg$currPos;
@@ -599,7 +602,7 @@ module.exports = (function() {
        * @returns {Array}
        */
       function mergeSeparatedValues(value, variadicArray) {
-        var i, result = [value];
+        var i, result = value ? [value] : [];
         for (i = 0; i < variadicArray.length; i++) {
           result.push(variadicArray[i][1]);
         }
