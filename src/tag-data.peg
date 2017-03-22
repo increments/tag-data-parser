@@ -6,7 +6,7 @@
    * @returns {Array}
    */
   function mergeSeparatedValues(value, variadicArray) {
-    var i, result = [value];
+    var i, result = value ? [value] : [];
     for (i = 0; i < variadicArray.length; i++) {
       result.push(variadicArray[i][1]);
     }
@@ -37,7 +37,7 @@ Name
   = [^<>;:"' ]+
 
 Versions
-  = value:Version variadicArray:($VersionSeparater Version)* {
+  = value:Version? variadicArray:($VersionSeparater Version)* {
     return mergeSeparatedValues(value, variadicArray);
   }
 
