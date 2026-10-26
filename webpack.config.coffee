@@ -1,4 +1,3 @@
-webpack = require 'webpack'
 path    = require 'path'
 
 module.exports =
