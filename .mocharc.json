@@ -1,6 +1,6 @@
 {
   "reporter": "spec",
   "ui": "bdd",
-  "require": "coffee-script/register",
+  "require": "coffeescript/register",
   "extension": ["coffee"]
 }
